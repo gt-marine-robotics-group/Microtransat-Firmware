@@ -1,5 +1,7 @@
 #include <Arduino.h>
 
+#include "sensors/imu.h"
+
 // put function declarations here:
 int myFunction(int, int);
 

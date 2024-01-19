@@ -1,4 +1,3 @@
-#include <SoftwareSerial.h>
 
 #include "TinyGPS++.h"
 #include "SoftwareSerial.h"
