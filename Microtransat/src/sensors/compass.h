@@ -1,0 +1,1 @@
+#define COMPASS_I2C_ADDRESS 0xC0

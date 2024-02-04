@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../Tests"
+		},
+		{
+			"name": "Unit Testing Test",
+			"path": "../../../../../../PlatformIO/Projects/Unit Testing Test"
+		}
+	],
+	"settings": {}
+}
