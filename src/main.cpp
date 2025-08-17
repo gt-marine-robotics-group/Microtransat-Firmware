@@ -1,4 +1,23 @@
-#include "Arduino.h"
+//////////////////////////////////////////////////////////////
+// Note: uncomment the following line to enable integration testing
+// This will include an hpp file for testing purposes
+// Be sure to comment out this line for production builds
+//////////////////////////////////////////////////////////////
+//#define INTEGRATION_TESTING
+
+#ifdef INTEGRATION_TESTING
+#include "../integration/blink.hpp" // Testing file to run
+#endif
+//////////////////////////////////////////////////////////////
+
+#ifndef INTEGRATION_TESTING
+#define INTEGRATION_TESTING
+
+//External imports
+#include <Arduino.h>
+#include "freertos/FreeRTOS.h"
+#include "freertos/FreeRTOSConfig.h"
+#include "board_layout.h"
 
 // Length of control loop
 #define CONTROL_LOOP_TIME 20
@@ -82,6 +101,12 @@ void TaskControl(void *pvParameters) {
     //  Drive servos
 
     // Delays a bit
-    vTaskDelay(pd_MS_TO_TICKS(CONTROL_LOOP_TIME));
+    vTaskDelay(pdMS_TO_TICKS(CONTROL_LOOP_TIME));
   }
 }
+
+void loop() {
+  // Empty loop
+}
+
+#endif // INTEGRATION_TESTING
