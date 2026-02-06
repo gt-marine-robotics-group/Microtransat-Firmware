@@ -1,0 +1,2 @@
+MyMessage.content  max_size:64  // Cap the size of the message to make things easier and avoid variable parsing
+// Can remove this if we use Sean's MRG Helm code

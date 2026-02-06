@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+message operationStatus {
+    bool estop = 1;     // Whether EStop is engaged
+    bool manual = 2;    // whether manual or automatic
+}
+
+message positionCommand {
+    sint32 roll = 1;        // Use signed int to get some directional control
+    sint32 pitch = 2;
+    sint32 yaw = 3;
+    sint32 surge = 4;      // Had to google these, but this is forward/backward
+    sint32 sway = 5;       // Laterally
+    sint32 heave = 6;      // Up and down
+}
+
+message motorCommand {
+    int32 motor1 = 1;      
+    int32 motor2 = 2;
+    int32 motor3 = 3;
+    int32 motor4 = 4;      
+    int32 motor5 = 5;      
+    int32 motor6 = 6;
+    int32 motor7 = 7;
+    int32 motor8 = 8;      
+}
+
+message MyMessage {
+    int32 id = 1;
+    string content = 2;
+}
+
+message Envelope {
+    oneof payload {
+        operationStatus status = 1;
+        positionCommand pos = 2;
+        MyMessage debug = 3;
+        motorCommand motor_msg = 4;
+    }
+}
