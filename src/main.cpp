@@ -3,7 +3,7 @@
 // This will include an hpp file for testing purposes
 // Be sure to comment out this line for production builds
 //////////////////////////////////////////////////////////////
-//#define INTEGRATION_TESTING
+#define INTEGRATION_TESTING
 
 #ifdef INTEGRATION_TESTING
 #include "../integration/blink.hpp" // Testing file to run
@@ -17,7 +17,6 @@
 #include <Arduino.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/FreeRTOSConfig.h"
-#include "board_layout.h"
 
 // Length of control loop
 #define CONTROL_LOOP_TIME 20
