@@ -2,20 +2,37 @@
 #include "TinyGPS++.h"
 #include "SoftwareSerial.h"
 
-SoftwareSerial serial_connection(10,11);
+// rx pico goes to tx gps and vice versa
+// physical pin 27 - gp 21
+// physical pin 26 - gp 20
+// software uses GP numbering
+SoftwareSerial serial_connection(21, 20);
+
+
 TinyGPSPlus gps;
+
+#define PMTK_SET_NMEA_OUTPUT_ALLDATA "$PMTK314,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0*28"
+#define PMTK_SET_NMEA_UPDATE_1HZ  "$PMTK220,1000*1F"
+#define PMTK_Q_RELEASE "$PMTK605*31"
+
+
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
+  while (!Serial) {}
+  delay(2000);
   serial_connection.begin(9600);
   Serial.println("GPS Start");
+  // copied from https://github.com/adafruit/Adafruit_GPS/blob/master/examples/GPS_SoftwareSerial_EchoTest/GPS_SoftwareSerial_EchoTest.ino
+  serial_connection.println(PMTK_SET_NMEA_UPDATE_1HZ);
+  serial_connection.println(PMTK_Q_RELEASE);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  //Serial.println(serial_connection.available());
   while(serial_connection.available()){
-    gps.encode(serial_connection.read());
+    Serial.write(serial_connection.read());
+    int raw = serial_connection.read();
+    gps.encode(raw);
   }
   if(gps.location.isUpdated()){
     Serial.println("Satellite Count: ");
