@@ -6,7 +6,9 @@
 #define INTEGRATION_TESTING
 
 #ifdef INTEGRATION_TESTING
-#include "../integration/blink.hpp" // Testing file to run
+// #include "../integration/blink.hpp" // Testing file to run
+// #include "../integration/gps_test.hpp" // Testing file to run
+#include "../integration/encoder_test.hpp"
 #endif
 //////////////////////////////////////////////////////////////
 
