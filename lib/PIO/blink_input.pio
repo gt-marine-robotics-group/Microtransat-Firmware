@@ -1,0 +1,25 @@
+.program blink_input
+
+.wrap_target
+    ; 1. Wait for GPIO 17 to go HIGH (1)
+    ; 'pin 0' refers to the first pin in the 'in' or 'jmp' pin group
+    wait 1 pin 0
+
+    pull noblock  ; Wait until there is something in the TX FIFO
+    out x, 32   ; Capture the whole number in the shift register
+
+    mov y, x    ; Put the value pulled from the OSR into x
+
+    ; 2. Blink Sequence (Same as before)
+    set pins, 1         ; LED ON
+    ;set y, 31           
+on_loop:
+    nop         [31]    
+    jmp y--, on_loop    
+
+    set pins, 0         ; LED OFF
+    set y, 31           
+off_loop:
+    nop         [31]    
+    jmp y--, off_loop   
+.wrap

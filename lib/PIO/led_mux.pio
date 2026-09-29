@@ -1,0 +1,22 @@
+.program led_mux
+.wrap_target
+    pull noblock    ; If FIFO empty, OSR = X. Otherwise, OSR = New Data.
+    mov x, osr      ; Update our "memory" (X) with the latest valid sequence
+
+next_frame:
+    mov y, osr      ; Copy OSR to Y to "peek" without shifting
+    jmp !y, done    ; If Y is 0, the rest of the sequence is empty; exit now
+    
+    out pins, 4     ; Shift out 4 bits to GPIOs
+
+    ; --- DELAY ---
+    set y, 31       
+delay_loop:
+    jmp y--, delay_loop [31] 
+
+    jmp next_frame  ; Check the next 4 bits
+done:
+    nop [31]    ; inserting this here because for some reason you can't jump directly to the end
+    ; The .wrap will take us back to 'pull noblock'
+    ; Since we never cleared X, the pattern will repeat!
+.wrap
