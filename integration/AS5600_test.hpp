@@ -24,7 +24,8 @@ void setup() {
 
   Wire.begin();
   as5600.begin(); // no hw dir pin since we are tying DIR to GND
-  as5600.setDirection(AS5600_CLOCK_WISE);
+  as5600.setDirection(AS5600_COUNTERCLOCK_WISE); // ccw positive
+  as5600.setOffset(311.13);
   Serial.print("AS5600 connected: ");
   Serial.println(as5600.isConnected() ? "true" : "false");
   delay(1000);
