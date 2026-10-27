@@ -4,11 +4,13 @@
 // Be sure to comment out this line for production builds
 //////////////////////////////////////////////////////////////
 #define INTEGRATION_TESTING
+#include "Servo.h"
 
 #ifdef INTEGRATION_TESTING
 // #include "../integration/blink.hpp" // Testing file to run
 // #include "../integration/gps_test.hpp" // Testing file to run
-#include "../integration/AS5600_test.hpp"
+// #include "../integration/AS5600_test.hpp"
+#include "../integration/servo_test.hpp"
 #endif
 //////////////////////////////////////////////////////////////
 
